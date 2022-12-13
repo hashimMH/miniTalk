@@ -6,14 +6,15 @@
 /*   By: hmohamed <hmohamed@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:23:43 by hmohamed          #+#    #+#             */
-/*   Updated: 2022/12/11 21:46:56 by hmohamed         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:19:42 by hmohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 
 void	handler(int signal)
 {
@@ -30,17 +31,18 @@ void	handler(int signal)
 	{
 		write(1, &a, 1);
 		bit = 0;
-		a = NULL;
+		a = 0;
 	}
 }
 
-int	main()
+int	main(int ac, char **av)
 {
-	signal(SIGUSR1, handler);
-	signal(SIGUSR2, handler);
+	(void)av;
 	printf("pid :  %d\n", getpid());
-	while (1)
+	while (ac == 1)
 	{
+		signal(SIGUSR1, handler);
+		signal(SIGUSR2, handler);
 		pause();
 	}
 }

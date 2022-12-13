@@ -6,7 +6,7 @@
 /*   By: hmohamed <hmohamed@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 18:23:36 by hmohamed          #+#    #+#             */
-/*   Updated: 2022/12/11 21:11:47 by hmohamed         ###   ########.fr       */
+/*   Updated: 2022/12/13 12:33:18 by hmohamed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ void	sendbit(int pid, char c)
 	while (bit < 8)
 	{
 		i = 1 & (c >> bit);
-		if (i == 1)
+		//printf("%i \n", i);
+		if (i != 0)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
 		bit++;
+		usleep(100);
 	}
 }
 
